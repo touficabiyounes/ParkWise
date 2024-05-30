@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Find your slot</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+      .full-screen-img {
+        background-image: url("https://img.freepik.com/free-vector/vector-empty-underground-car-parking_107791-1580.jpg?w=1380&t=st=1681243635~exp=1681244235~hmac=e09cd57c143cd74d866719722fb761617c448f7dac10f17be8bf7652a1d31080");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+      }
+      .center-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      #custom-card.card {
+        width: 600px;
+        height: 300px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+        margin: 0 auto;
+        background-color: rgb(255, 216, 200);
+        opacity: 0.85;
+  }
+    </style>
+  </head>
+  <body>
+    {{> header}}
+    <div class="full-screen-img">
+      <div class="container center-button">
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="custom-card" class="card text-center">
+              <div class="card-body">
+                <h1 class="text-black mb-5">Find Your Parking Slot</h1>
+                <h6 class="text-black mb-5">Choose from millions of availble spaces</h6>
+                {{#authenticated}}
+                <a href="/make_reservation" class="btn btn-lg btn-primary">Get Started</a>
+                {{/authenticated}}
+                {{^authenticated}}
+                  <a href="/login" class="btn btn-lg btn-primary">Login</a> 
+                {{/authenticated}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{> footer}}
+  </body>
+</html>
+
+

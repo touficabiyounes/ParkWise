@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reservation Form</title>
+  </head>
+  <body>
+    {{> header}}
+
+    <h1>Reservation Form</h1>
+    <form action="/make_reservation" method="post">
+
+      <select name="parkingName">
+        {{#options}}
+        <option value="{{value}}">{{label}}</option>
+        {{/options}}
+      </select>
+      <br>
+
+
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" name="start-date" value="{{startDate}}"><br>
+
+      <label for="start-time">Start Time:</label>
+      <input type="time" id="start-time" name="start-time" min="" value="{{startTime}}" onchange="setEndTimeMin()"><br>
+
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" name="end-date" value="{{endDate}}"><br>
+
+      <label for="end-time">End Time:</label>
+      <input type="time" id="end-time" name="end-time" min="" value="{{endTime}}"  onchange="checkEndTime()"><br>
+
+      <input type="submit" value="Submit">
+    </form>
+     {{message}}
+      {{#reservations}}
+        {{reservation_info}}
+       {{/reservations}}
+<script>
+    const now = new Date();
+    const currentDateTime = now.toISOString().slice(0, 16);
+
+    const startDateInput = document.querySelector("#start-date");
+    const startTimeInput = document.querySelector("#start-time");
+    const endDateInput = document.querySelector("#end-date");
+    const endTimeInput = document.querySelector("#end-time");
+
+    startDateInput.setAttribute("min", currentDateTime.slice(0, 10));
+    startDateInput.setAttribute("value", "{{startDate}}");
+    startTimeInput.setAttribute("min", currentDateTime.slice(11));
+    startTimeInput.setAttribute("value", "{{startTime}}");
+
+    const selectedDateTime = startDateInput.value + "T" + startTimeInput.value;
+    if (selectedDateTime < currentDateTime) {
+      startDateInput.setAttribute("value", currentDateTime.slice(0, 10));
+      startTimeInput.setAttribute("value", currentDateTime.slice(11));
+    }
+
+    startDateInput.setAttribute("min", currentDateTime.slice(0, 10));
+    startTimeInput.setAttribute("min", currentDateTime.slice(11));
+    endTimeInput.setAttribute("min", currentDateTime);
+    endTimeInput.setAttribute("value", "{{endTime}}");
+
+    function setEndTimeMin() {
+      const startDateValue = startDateInput.value;
+      const startTimeValue = startTimeInput.value;
+      const startDateTime = startDateValue + "T" + startTimeValue;
+      endTimeInput.setAttribute("min", startDateTime);
+      endTimeInput.setAttribute("value", startDateTime);
+    }
+
+    function checkEndTime() {
+      const startDateValue = startDateInput.value;
+      const startTimeValue = startTimeInput.value;
+      const endDateValue = endDateInput.value;
+      const endTimeValue = endTimeInput.value;
+      const startDateTime = new Date(startDateValue + "T" + startTimeValue);
+      const endDateTime = new Date(endDateValue + "T" + endTimeValue);
+
+        if (endDateTime <= startDateTime) {
+          alert("End date and time must be after start date and time!");
+          endTimeInput.value = startDateTime.toISOString().slice(0, 16);
+        }
+      }
+    </script>
+    {{> footer}}
+  </body>
+</html>

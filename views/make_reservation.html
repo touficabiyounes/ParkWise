@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reservation Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+      <style>
+        .bg-purple {
+          background-color: rgb(255, 216, 200);
+          }
+        footer {
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          height: 50px;
+          background-color: #a2a2a2;
+  }
+        </style>
+    </head>
+    <body class="bg-purple">
+    {{> header}}
+
+    <div class="container mt-5">
+      <h1 class="mb-4">Reservation Form</h1>
+      <form action="/make_reservation" method="post">
+        <div class="form-group">
+          <label for="parkingName">Parking Name:</label>
+          <select class="form-control" id="parkingName" name="parkingName">
+            {{#options}}
+            <option value="{{value}}">{{label}}</option>
+            {{/options}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="start-date">Start Date:</label>
+          <input class="form-control" type="date" id="start-date" name="start-date">
+        </div>
+        <div class="form-group">
+          <label for="start-time">Start Time:</label>
+          <input class="form-control" type="time" id="start-time" name="start-time" min="" onchange="setEndTimeMin()">
+        </div>
+        <div class="form-group">
+          <label for="end-date">End Date:</label>
+          <input class="form-control" type="date" id="end-date" name="end-date">
+        </div>
+        <div class="form-group">
+          <label for="end-time">End Time:</label>
+          <input class="form-control" type="time" id="end-time" name="end-time" min="" onchange="checkEndTime()">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {{message}}
+    </div>
+    {{> footer}}
+
+
+
+    <script>
+      const now = new Date();
+      const currentDateTime = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }).slice(0, 16);
+      
+      const startDateInput = document.querySelector("#start-date");
+      const startTimeInput = document.querySelector("#start-time");
+      const endDateInput = document.querySelector("#end-date");
+      const endTimeInput = document.querySelector("#end-time");
+    
+      startDateInput.setAttribute("min", new Date(Date.now()).toISOString().slice(0, 10));
+      startDateInput.setAttribute("value", new Date(Date.now()).toISOString().slice(0, 10));
+      startTimeInput.setAttribute("value", currentDateTime.slice(11));
+      
+      function setEndTimeMin() {
+        const startDateValue = startDateInput.value;
+        const startTimeValue = startTimeInput.value;
+        const startDateTime = startDateValue + "T" + startTimeValue;
+        endTimeInput.setAttribute("min", startDateTime);
+        endTimeInput.setAttribute("value", startDateTime);
+      }
+      
+      function checkEndTime() {
+        const startDateValue = startDateInput.value;
+        const startTimeValue = startTimeInput.value;
+        const endDateValue = endDateInput.value;
+        const endTimeValue = endTimeInput.value;
+        const startDateTime = new Date(startDateValue + "T" + startTimeValue);
+        const endDateTime = new Date(endDateValue + "T" + endTimeValue);
+      
+        if (endDateTime <= startDateTime) {
+          if (endDateValue === startDateValue && endTimeValue < startTimeValue) {
+            alert("End time must be after start time!");
+            endTimeInput.value = startTimeInput.value;
+          } else {
+            alert("End date and time must be after start date and time!");
+            endTimeInput.value = startDateTime.toISOString().slice(0, 16);
+          }
+        }
+      }
+    
+    </script>
+    
+    
+  
+  </body>
+</html>
+

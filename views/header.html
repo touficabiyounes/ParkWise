@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Find MY Slot</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Home</a>
+      <div class="navbar-nav ml-auto">
+        {{#authenticated}}
+        <form class="form-inline" action="/logout" method="POST"><button type="submit" class="btn btn-outline-primary">Logout</button></form> 
+        <form class="form-inline" action="/user_reservation" method="get"><button type="submit" class="btn btn-outline-primary">My profile</button></form>
+        {{/authenticated}}
+
+        {{^authenticated}}
+        <form class="form-inline" action="/login" method="POST"><button type="submit" class="btn btn-outline-primary">Login</button></form> 
+        {{/authenticated}}
+      </div>
+    </nav>
+  </body>
+</html>

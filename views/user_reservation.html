@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEENsjtFwWoCcD8LkOZaTb" crossorigin="anonymous">
+    <style>
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #a2a2a2;
+  }
+  .bg-purple {
+    background-color: rgb(255, 216, 200);
+      }
+        </style>
+    </head>
+    <body class="bg-purple">
+    {{> header}}
+    <br>
+    <div class="container mt-5">
+      <h1>Hi {{username}}, here you can find your reservations and their keys!</h1>
+      {{#user_reservations}}
+      <div class="card my-3">
+        <div class="card-body">
+          <h5 class="card-title">Reservation details:</h5>
+          <p class="card-text">Parking Location: {{parkingName}}<br>Reservation Id: {{reservationId}} Slot: {{slotNumber}}<br>Arriving: {{startDate}}<br>Leaving: {{endDate}}</p>
+          <a href="/delete/{{reservationId}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+      {{/user_reservations}}
+      {{message}}
+    </div>
+    {{> footer}}
+  </body>
+
+</html>

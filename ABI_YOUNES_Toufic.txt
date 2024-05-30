@@ -1,0 +1,7 @@
+Le problème du stationnement en ville est un enjeu majeur pour de nombreux conducteurs. Dans les quartiers densément peuplés,
+il est souvent difficile de trouver une place de parking disponible et légale, et les conducteurs peuvent passer des heures 
+à chercher une place. Ce problème peut causer du stress, des retards et des coûts élevés en termes de temps et d'argent pour 
+les conducteurs, en plus de contribuer à la congestion routière et à la pollution dans les zones urbaines.
+Ce problème est complexe car il implique de nombreux facteurs, tels que le nombre limité de places 
+de stationnement dans les zones urbaines, la demande élevée de places de stationnement, la réglementation et la surveillance des places de stationnement,
+ainsi que la disponibilité de technologies pour faciliter la réservation et le paiement des places de stationnement.

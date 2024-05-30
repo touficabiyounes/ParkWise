@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>New user</title>
+    <style>
+     
+      footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #9f9a9a;
+  }
+  .bg-purple {
+    background-color: rgb(255, 216, 200);
+      }
+    </style>
+</head>
+<body class="bg-purple">
+  {{> header}}
+  <br>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <form action="/new_user" method="POST" class="w-50">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Create</button>
+      <form action="/login" method="POST" class="mt-4 text-center">
+        <input type="submit" value="Already got an account" class="btn btn-secondary btn-block">
+    </form>
+  </div>
+  {{> footer}}
+</body>
+</html>
